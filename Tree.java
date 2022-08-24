@@ -32,10 +32,19 @@ public class Tree {
         System.out.println();
     }
 
+    /**
+     * @param id the id you want to search for
+     * @return Content of the node if it was found
+     */
     public Content search(int id) {
         return searchAt(this.root, id);
     }
 
+    /**
+     * @param node the parent node from which the function will recurse
+     * @param id the id to search for
+     * @return Content if it was found
+     */
     private Content searchAt(Node node, int id) {
         if (node == null) return null;
         if (id > node.getContent().id) {
