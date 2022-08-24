@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Tree
+comment1.params=
+comment1.target=Tree()
+comment2.params=node\ content
+comment2.target=Node\ insertAt(Node,\ Content)
+comment3.params=node
+comment3.target=void\ printAscAt(Node)
+comment4.params=content
+comment4.target=void\ insert(Content)
+comment5.params=
+comment5.target=void\ printAsc()
+numComments=6
