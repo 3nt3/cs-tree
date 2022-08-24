@@ -66,12 +66,13 @@ public class TreeDemo extends Fenster implements KnopfLauscher, RollbalkenLausch
         tree.insert(content);
         content = new Content(5, "adsf");
         tree.insert(content);
-        content = new Content(17, "penis");
+        content = new Content(17, "ur mom");
         tree.insert(content);
 
         tree.search(17).print();
 
         tree.printAsc();
+        tree.printDesc();
     }
 
     @Override

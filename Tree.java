@@ -38,6 +38,7 @@ public class Tree {
      */
     public Content search(int id) {
         return searchAt(this.root, id);
+
     }
 
     /**
@@ -55,4 +56,18 @@ public class Tree {
             return node.getContent();
         }
     }
+
+    private void printDescAt(Node node) {
+        if (node == null) return;
+        printDescAt(node.right);
+        System.out.print(node.getContent().id + " ");
+        printDescAt(node.left);
+    }
+    public void printDesc() {
+        printDescAt(root);
+        System.out.println();
+    }
+    // TODO: PrintLevel(int level)
+    // TODO: GetLevel(content) [root ist auf 1, Rückgabe "0", falls nicht vorhanden]
+    // TODO: depth()
 }
