@@ -89,7 +89,7 @@ public class Tree {
 
     private Node printLevelFrom(Node node, int level) {
         if (node == null) {
-            System.out.print("x \t");
+            System.out.print("❌ \t");
             return null;
         }
         if (level != 0) {
@@ -120,7 +120,6 @@ public class Tree {
     }
 
     public void fromFile(String fileName) throws IOException {
-//        BufferedReader in = new BufferedReader(new FileReader(fileName));
         Reader reader = Files.newBufferedReader(Paths.get(fileName));
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -128,5 +127,15 @@ public class Tree {
         for (Content node : nodes) {
             this.insert(node);
         }
+    }
+
+    public int depth() {
+        return depthFrom(this.root, 1);
+    }
+
+    private int depthFrom(Node node, int depth) {
+        if (node == null) return depth - 1;
+        return Math.max(depthFrom(node.right, depth + 1),
+                depthFrom(node.left, depth + 1));
     }
 }
