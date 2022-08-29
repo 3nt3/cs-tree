@@ -10,6 +10,10 @@ public class Content
     }
 
     public void print() {
-        System.out.println(this.id + " " + this.value);
+        System.out.println(this.toString());
+    }
+
+    public String toString() {
+        return this.id + " " + this.value;
     }
 }

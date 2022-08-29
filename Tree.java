@@ -27,6 +27,9 @@ public class Tree {
         root = insertAt(root, content);
     }
 
+    /**
+     * Prints all elements of the tree in ascending order
+     */
     public void printAsc() {
         printAscAt(root);
         System.out.println();
@@ -43,14 +46,14 @@ public class Tree {
 
     /**
      * @param node the parent node from which the function will recurse
-     * @param id the id to search for
+     * @param id   the id to search for
      * @return Content if it was found
      */
     private Content searchAt(Node node, int id) {
         if (node == null) return null;
         if (id > node.getContent().id) {
             return searchAt(node.right, id);
-        } else if (id < node.getContent().id){
+        } else if (id < node.getContent().id) {
             return searchAt(node.left, id);
         } else {
             return node.getContent();
@@ -63,11 +66,49 @@ public class Tree {
         System.out.print(node.getContent().id + " ");
         printDescAt(node.left);
     }
+
+    /**
+     * Prints all elements of the tree in descending order
+     */
     public void printDesc() {
         printDescAt(root);
         System.out.println();
     }
-    // TODO: PrintLevel(int level)
+
+    public void printLevel(int level) {
+        printLevelFrom(this.root, level-1);
+        System.out.println();
+    }
+
+    private Node printLevelFrom(Node node, int level) {
+        if (node == null) {
+            System.out.print("x \t");
+            return null;
+        }
+        if (level != 0) {
+            printLevelFrom(node.left, level - 1);
+            printLevelFrom(node.right, level - 1);
+        } else {
+            System.out.print(node.getContent().id + " \t");
+        }
+
+        return node;
+    }
     // TODO: GetLevel(content) [root ist auf 1, Rückgabe "0", falls nicht vorhanden]
+    public int getLevel(int id) {
+        return getLevelFrom(this.root, id, 1);
+    }
+
+    private int getLevelFrom(Node node, int id, int level) {
+        if (node == null ) return -1;
+        if (node.getContent().id == id) {
+            return level;
+        }
+
+        if (node.left != null && node.getContent().id > id) {
+            return getLevelFrom(node.left, id, level+1);
+        }
+        return getLevelFrom(node.right, id, level+1);
+    }
     // TODO: depth()
 }

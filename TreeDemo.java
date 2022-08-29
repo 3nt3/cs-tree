@@ -71,8 +71,13 @@ public class TreeDemo extends Fenster implements KnopfLauscher, RollbalkenLausch
 
         tree.search(17).print();
 
-        tree.printAsc();
-        tree.printDesc();
+//        tree.printAsc();
+//        tree.printDesc();
+
+//        for (int i =  0; i < 5; i++) {
+//            tree.printLevel(1);
+//        }
+        System.out.format("level of %s: %d\n", content.toString(), tree.getLevel(17));
     }
 
     @Override
