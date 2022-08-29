@@ -9,8 +9,12 @@
 //Import
 
 import basis.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class TreeDemo extends Fenster implements KnopfLauscher, RollbalkenLauscher, ListAuswahlLauscher {
 
@@ -60,24 +64,33 @@ public class TreeDemo extends Fenster implements KnopfLauscher, RollbalkenLausch
         stift = new Stift();
 
         tree = new Tree();
-        content = new Content(10, "Joe");
-        tree.insert(content);
-        content = new Content(20, "Mama");
-        tree.insert(content);
-        content = new Content(5, "adsf");
-        tree.insert(content);
-        content = new Content(17, "ur mom");
-        tree.insert(content);
+//        content = new Content(10, "Joe");
+//        tree.insert(content);
+//        content = new Content(20, "Mama");
+//        tree.insert(content);
+//        content = new Content(5, "adsf");
+//        tree.insert(content);
+//        content = new Content(17, "ur mom");
+//        tree.insert(content);
+        try {
+            tree.fromFile("tree.json");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        tree.search(17).print();
+        tree.search(204).print();
 
 //        tree.printAsc();
 //        tree.printDesc();
 
-//        for (int i =  0; i < 5; i++) {
-//            tree.printLevel(1);
-//        }
-        System.out.format("level of %s: %d\n", content.toString(), tree.getLevel(17));
+        for (int i =  0; i < 5; i++) {
+            tree.printLevel(i);
+        }
+//        System.out.format("level of %s: %d\n", content.toString(), tree.getLevel(17));
+
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        System.out.println(gson.toJson(tree));
     }
 
     @Override

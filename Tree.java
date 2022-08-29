@@ -1,3 +1,10 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class Tree {
     private Node root;
@@ -76,7 +83,7 @@ public class Tree {
     }
 
     public void printLevel(int level) {
-        printLevelFrom(this.root, level-1);
+        printLevelFrom(this.root, level - 1);
         System.out.println();
     }
 
@@ -94,21 +101,32 @@ public class Tree {
 
         return node;
     }
+
     // TODO: GetLevel(content) [root ist auf 1, Rückgabe "0", falls nicht vorhanden]
     public int getLevel(int id) {
         return getLevelFrom(this.root, id, 1);
     }
 
     private int getLevelFrom(Node node, int id, int level) {
-        if (node == null ) return -1;
+        if (node == null) return -1;
         if (node.getContent().id == id) {
             return level;
         }
 
         if (node.left != null && node.getContent().id > id) {
-            return getLevelFrom(node.left, id, level+1);
+            return getLevelFrom(node.left, id, level + 1);
         }
-        return getLevelFrom(node.right, id, level+1);
+        return getLevelFrom(node.right, id, level + 1);
     }
-    // TODO: depth()
+
+    public void fromFile(String fileName) throws IOException {
+//        BufferedReader in = new BufferedReader(new FileReader(fileName));
+        Reader reader = Files.newBufferedReader(Paths.get(fileName));
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Content[] nodes = gson.fromJson(reader, Content[].class);
+        for (Content node : nodes) {
+            this.insert(node);
+        }
+    }
 }
